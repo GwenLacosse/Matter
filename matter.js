@@ -13,7 +13,7 @@
  *      opacity: 1;
  * } 
  * 
- * Matter add on html tag a class on the @in Event and the @leave Event to create transition
+ * Matter add on html tag a class to create transition
  * 
  * html.matter-in .matter-transition {
  *      transform: translate3d(0, -40px, 0);
@@ -32,7 +32,7 @@
  * ___________________________
  * 
  *  
- * this library was inspired by SwupJS, NovaJS or HighwayJS 
+ * this library was inspired by Swup or HighwayJS 
  * 
  * 
  * Configure Matter with this kind of object
@@ -63,16 +63,19 @@ export default class Matter {
         this.history.push(window.location.href)
     }
 
-    getHistory() {
-        console.log(this.history);
-        return this.history
-    }
-
+    /**
+     * Retrieve all links in DOM 
+     * 
+     * @returns
+     */
     getLinks() {
         this.links = Array.from(document.querySelectorAll(this.conf.linksSelector))
         return this
     }
 
+    /**
+     * Prevent pop statement
+     */
     onPop() {
         window.onpopstate = (e) => {
             e.preventDefault()
@@ -83,6 +86,10 @@ export default class Matter {
         }
     }
 
+
+    /**
+     * Listen on click event for all links selected and bind fetcher func
+     */
     bindLinksClick() {
         this.links.forEach((link) => {
             link.addEventListener('click', (e) => {
@@ -95,13 +102,21 @@ export default class Matter {
         })
     }
 
+    /**
+     * Fetch next URL and create HTML element for conf.target. 
+     * Apply a transition on html and replace innerHTML of target by result
+     * In error case : return default way
+     * 
+     * @param {string} href URL to
+     * @param {boolean} historyPushed Push last link in history. Used as false for window popstate event 
+     * @returns
+     */
     fetchNextContent(href, historyPushed = true) {
         if (href == '' || !href) {
             throw new Error("Can't fetch an empty href");
         }
 
         this.html.classList.add('matter-leave')
-
         const lastHref = window.location.href
 
         fetch(href)
@@ -114,7 +129,7 @@ export default class Matter {
                 // Create new content
                 const nextContent = document.createElement('body');
 
-                // Getter && setter for the new targeted content
+                // Set the new content
                 nextContent.innerHTML = node.body.innerHTML
                 try {
                     this.target.innerHTML = nextContent.querySelector(this.conf.target).innerHTML
@@ -144,12 +159,4 @@ export default class Matter {
         return this
     }
 
-}
-
-function wait (time)
-{
-    let now = new Date().getTime()
-    while (new Date().getTime() - now < time) {
-        continue;
-    }
 }
