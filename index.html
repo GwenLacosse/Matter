@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transition TEST | Matter</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="matter.js"></script>
+    <script type="module" src="app.js"></script>
+</head>
+<body>
+    <ul>
+        <li><a data-matter href="/">Matter</a></li>
+        <li><a data-matter href="/about.html">About</a></li>
+        <li><a data-matter href="/contact.html">Contact</a></li>
+    </ul>
+
+    <div class="container">
+        <header>
+            <video autoplay muted loop style="width: 100%;">
+                <source src="video2.mp4" type="video/mp4">
+            </video>
+            <h1>Matter JS</h1>
+        </header>
+        <main id="matter" class="matter-transition">
+            <h1>What's Matter does ? </h1>
+            <br><br>
+            <!-- <img src="https://unsplash.it/id/1/5616/3744" alt="test" style="width: 600px; max-width: 100%; height: auto; object-fit: cover;"> -->
+            <br>
+            <div>
+                <p>
+                    MatterJS is a content fetcher than emulate an applicative navigation with transition.
+                    <br><br>
+                    it binds some processes on links selected by <b>@linksSelector</b>.
+                    <br>
+                    it will fetch content from URL on click,
+                    <br>
+                    then on response, the content on current URL focused by <b>@target</b> will be replaced by the <b>@target</b> on the next URL.
+                    <br>
+                    <br>
+                    For creating transition, Matter uses some CSS classes 
+                    <br>
+                    <pre>
+                        <code>
+        .matter-transition {
+            transition: .2s ease-out
+            transform: translate3d(0,0,0)
+            opacity: 1
+        }
+                        </code>
+                    </pre>
+                    Matter adds on html tag a class on the <b>@in</b> and <b>@leave</b> Event to create transition <br>
+                    <pre>
+                        <code>
+        html.matter-in .matter-transition { 
+            transform: translate3d(0, -40px, 0); 
+            opacity: 0; 
+            transition: 0 !important; 
+        }
+    
+        html.matter-leave .matter-transition {
+            transform: translate3d(0, 40px, 0);
+            opacity: 0;
+            transition: 0 !important; 
+        }
+                        </code>
+                    </pre>
+                    You are free to override these classes ;)
+                    <br><br>
+                    <hr>
+                    <br>
+                    this library was inspired by libraries like <b>Swup</b> or <b>HighwayJS</b>
+                    <br>
+                </p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

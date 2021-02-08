@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transition TEST | About</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+</head>
+<body>
+    <ul>
+        <li><a data-matter href="/">Home</a></li>
+        <li><a data-matter href="/about.html">About</a></li>
+        <li><a data-matter href="/contact.html">Contact</a></li>
+    </ul>
+    
+
+    <main id="matter" class="matter-transition">
+        <h1>About</h1>
+        <br>
+        <h2>Let's talk about code</h2>
+        <br>
+        <br>
+
+        <p>Here is the code for Matter (v1.0.0)</p>
+        <pre>
+            <code class="language-javascript">
+    export default class Matter {
+
+        conf = {
+            target: '#matter',
+            linksSelector: 'a[data-matter]',
+        }
+        links = []
+        history = []
+        html = null
+        target = null
+    
+        constructor (conf) {
+            this.conf = typeof conf == 'object' ? {...this.conf, ...conf} : this.conf
+            this.html = document.querySelector('html')
+            this.target = document.querySelector(this.conf.target)
+            this.getLinks().bindLinksClick()
+            this.onPop()
+            this.history.push(window.location.href)
+        }
+    
+        getHistory() {
+            console.log(this.history);
+            return this.history
+        }
+    
+        getLinks() {
+            this.links = Array.from(document.querySelectorAll(this.conf.linksSelector))
+            return this
+        }
+    
+        onPop() {
+            window.onpopstate = (e) => {
+                e.preventDefault()
+                if (this.history.length > 1) {
+                    this.fetchNextContent(this.history[this.history.length - 1], false)
+                    this.history = this.history.filter((href, i) => i != this.history.length - 1);
+                }
+            }
+        }
+    
+        bindLinksClick() {
+            this.links.forEach((link) => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (e.target.href == window.location.href) {
+                        return
+                    }
+                    this.fetchNextContent(e.target.href)
+                })
+            })
+        }
+    
+        fetchNextContent(href, historyPushed = true) {
+            if (href == '' || !href) {
+                throw new Error("Can't fetch an empty href");
+            }
+    
+            this.html.classList.add('matter-leave')
+    
+            const lastHref = window.location.href
+    
+            fetch(href)
+            .then(r => r.text())
+            .then(html => {
+                const node = new DOMParser().parseFromString(html, 'text/html');
+                document.title = node.head.querySelector('title').innerText
+        
+                setTimeout(() => {
+                    // Create new content
+                    const nextContent = document.createElement('body');
+    
+                    // Getter && setter for the new targeted content
+                    nextContent.innerHTML = node.body.innerHTML
+                    try {
+                        this.target.innerHTML = nextContent.querySelector(this.conf.target).innerHTML
+                    } catch (e) {
+                        location.replace(href);
+                        throw new Error(e)
+                    }
+    
+                    // Save in history
+                    window.history.pushState({to: href, from: lastHref}, document.title, href);
+                    if (historyPushed) {
+                        this.history.push(lastHref)
+                    }
+    
+                    // Apply transition
+                    this.html.classList.add('matter-in')
+                    this.html.classList.remove('matter-leave')
+                    setTimeout(() => this.html.classList.remove('matter-in'), 100)
+                }, 200)
+        
+            })
+            .catch(e => {
+                console.error(e)
+                window.location.href = href
+            })
+        
+            return this
+        }
+    
+    }
+            </code>
+        </pre>
+    </main>
+</body>
+</html>

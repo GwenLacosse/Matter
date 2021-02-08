@@ -1,0 +1,186 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  max-width: 600px;
+}
+
+html {
+  background-color: #0e0e0e;
+  color: #f5f4f4;
+  width: 100vw;
+}
+
+html.matter-leave body {
+  overflow: hidden;
+}
+
+html.matter-leave .matter-transition {
+  -webkit-transform: translate3d(0, 40px, 0);
+          transform: translate3d(0, 40px, 0);
+  opacity: 0;
+  -webkit-transition: 0 !important;
+  transition: 0 !important;
+}
+
+html.matter-in body {
+  overflow: hidden;
+}
+
+html.matter-in .matter-transition {
+  -webkit-transform: translate3d(0, -40px, 0);
+          transform: translate3d(0, -40px, 0);
+  opacity: 0;
+  -webkit-transition: 0 !important;
+  transition: 0 !important;
+}
+
+.matter-transition {
+  -webkit-transition: .2s ease-out;
+  transition: .2s ease-out;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+
+.--delay2 {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.--delay3 {
+  -webkit-transition: 0.45s;
+  transition: 0.45s;
+}
+
+.--delay4 {
+  -webkit-transition: 0.6s;
+  transition: 0.6s;
+}
+
+body {
+  overflow-x: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  min-height: 100vh;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+  scroll-behavior: smooth;
+  width: 100%;
+}
+
+ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  list-style: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: #0a0a0a;
+  padding: 20px;
+  gap: 50px;
+  min-width: 200px;
+  z-index: 10;
+}
+
+ul a {
+  text-decoration: none;
+  color: white;
+  -webkit-transition: .2s;
+  transition: .2s;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: .2s;
+}
+
+ul a:hover {
+  color: whitesmoke;
+  text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.3), -2px -2px 2px rgba(255, 255, 255, 0.3), 2px -2px 2px rgba(255, 255, 255, 0.3), -2px 2px 2px rgba(255, 255, 255, 0.3), 4px -4px 10px #fc7303, -4px 4px 10px #fc03c6;
+}
+
+.container {
+  width: 100%;
+  margin-left: 200px;
+}
+
+.container header {
+  width: 100%;
+  max-height: 300px;
+  overflow: hidden;
+  position: relative;
+}
+
+.container header h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-size: 4rem;
+  word-wrap: inherit;
+  text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.3), -2px -2px 2px rgba(255, 255, 255, 0.3), 2px -2px 2px rgba(255, 255, 255, 0.3), -2px 2px 2px rgba(255, 255, 255, 0.3), 4px -4px 10px #fc7303, -4px 4px 10px #fc03c6;
+}
+
+main {
+  padding: 20px;
+  margin: 20px auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+main h1 {
+  text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.3), -2px -2px 2px rgba(255, 255, 255, 0.3), 2px -2px 2px rgba(255, 255, 255, 0.3), -2px 2px 2px rgba(255, 255, 255, 0.3), 4px -4px 10px #fc7303, -4px 4px 10px #fc03c6;
+}
+
+code {
+  text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.3), -2px -2px 2px rgba(255, 255, 255, 0.3), 2px -2px 2px rgba(255, 255, 255, 0.3), -2px 2px 2px rgba(255, 255, 255, 0.3), 4px -4px 10px #fc7303, -4px 4px 10px #fc03c6;
+  line-height: 1.8;
+}
+
+@media screen and (max-width: 850px) {
+  img {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  ul {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    width: 100%;
+    height: auto;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .container {
+    margin-left: 0;
+  }
+  .container header h1 {
+    font-size: 2rem;
+  }
+}
+/*# sourceMappingURL=style.css.map */
