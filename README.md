@@ -45,13 +45,13 @@ Matter adds on html tag a class to create transition
 html.matter-in .matter-transition {
      transform: translate3d(0, -40px, 0);
      opacity: 0;
-     transition: 0 !important;
+     transition: 0;
 }
 
 html.matter-leave .matter-transition {
      transform: translate3d(0, 40px, 0);
      opacity: 0;
-     transition: 0 !important; 
+     transition: 0; 
 }
 ```
 
