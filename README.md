@@ -4,7 +4,7 @@ MatterJS is a content fetcher than emulate an applicative navigation with transi
 
 it binds some process on links selected by **linksSelector**
 it will fetch content from URL on click
-on response, the content on current URL focused by **target** will be replaced by the @target on the next URL
+on response, the content on current URL focused by **target** will be replaced by the **target** on the next URL
 
 ## Implementation
 
