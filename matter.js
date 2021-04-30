@@ -1,40 +1,4 @@
-/**
- * MatterJS is a content fetcher than emulate an applicative navigation with transition
- * 
- * it binds some process on links selected by @linksSelector
- * it will fetch content from URL on click
- * on response, the content on current URL focused by @target will be replaced by the @target on the next URL
- * 
- * For creating transition, Matter uses some CSS classes
- * 
- * .matter-transition {
- *      transition: .2s ease-out;
- *      transform: translate3d(0,0,0);
- *      opacity: 1;
- * } 
- * 
- * Matter add on html tag a class to create transition
- * 
- * html.matter-in .matter-transition {
- *      transform: translate3d(0, -40px, 0);
- *      opacity: 0;
- *      transition: 0 !important;
- * }
- * 
- * html.matter-leave .matter-transition {
- *      transform: translate3d(0, 40px, 0);
- *      opacity: 0;
- *      transition: 0 !important; 
- * }
- * 
- * You are free to override these classes ;)
- * 
- * ___________________________
- * 
- *  
- * this library was inspired by Swup or HighwayJS 
- * 
- * 
+/*
  * Configure Matter with this kind of object
  * 
  * @var conf = {
