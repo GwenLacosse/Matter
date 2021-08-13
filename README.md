@@ -31,34 +31,7 @@ let conf = {
 
 ## Transition
 
-For creating transition, Matter uses some CSS classes
-
-```CSS
-.matter-transition {
-     transition: .2s ease-out;
-     transform: translate3d(0,0,0);
-     opacity: 1;
-}
-```
-
-Matter adds on html tag a class to create transition
-
-```CSS
-html.matter-in .matter-transition {
-     transform: translate3d(0, -40px, 0);
-     opacity: 0;
-     transition: 0;
-}
-
-html.matter-leave .matter-transition {
-     transform: translate3d(0, 40px, 0);
-     opacity: 0;
-     transition: 0; 
-}
-```
-
-You are free to override these classes ;)
-
+*_Work on JS Transition: target => ignore css and configure transition_*
 ___________________________
 
  
