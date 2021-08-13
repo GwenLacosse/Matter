@@ -126,7 +126,7 @@ export default class Matter {
                             this.html.classList.remove('matter-in')
                                 this.getLinks().bindLinksClick()
                                 this.isLoaded = true
-                        }, 0)
+                        }, 500)
                     }, 200)
                 }
             })
