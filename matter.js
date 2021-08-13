@@ -21,7 +21,36 @@ export default class Matter {
     links = [];
     history = [];
     isLoaded = false;
-
+    
+    animationInConfig = {
+        keyframes: [
+            {
+                opacity: 1,
+                transform: 'translate3d(0, 0, 0)',
+            }
+        ],
+        options: {
+            duration: 200,
+            easing: 'linear'
+        }
+    }
+    
+    animationOutConfig = {
+        keyframes: [
+            {
+                opacity: 0,
+                transform: 'translate3d(0, 100px, 0)',
+            }
+        ],
+        options: {
+            duration: 200,
+            easing: 'linear',
+        }
+    }
+    /**
+     *
+     * @param {object<target<string>, linksSelector<string>>}conf
+     */
     constructor (conf) {
         this.conf = typeof conf == 'object' ? {...this.conf, ...conf} : this.conf
         this.html = document.querySelector('html')
@@ -92,6 +121,7 @@ export default class Matter {
         if (href === '' || !href) {
             throw new Error("Can't fetch an empty href");
         }
+
         const lastHref = window.location.href
         fetch(href)
             .then(r => r.text())
@@ -99,8 +129,13 @@ export default class Matter {
                 if (!this.isLoaded) {
                     const node = new DOMParser().parseFromString(html, 'text/html');
                     document.title = node.head.querySelector('title').innerText
-                    this.html.classList.add('matter-leave')
-                    setTimeout(() => {
+
+                    let animationOut = this.target.animate(
+                        this.animationOutConfig.keyframes,
+                        {...this.animationOutConfig.options, fill: "forwards"}
+                    )
+
+                    animationOut.addEventListener('finish', () => {
                         // Create new content
                         const nextContent = document.createElement('body');
 
@@ -120,14 +155,15 @@ export default class Matter {
                         }
 
                         // Apply transition
-                        this.html.classList.add('matter-in')
-                        this.html.classList.remove('matter-leave')
-                        setTimeout(() => {
-                            this.html.classList.remove('matter-in')
-                                this.getLinks().bindLinksClick()
-                                this.isLoaded = true
-                        }, 500)
-                    }, 200)
+                        let animationIn = this.target.animate(
+                            this.animationInConfig.keyframes,
+                            {...this.animationInConfig.options, fill: "forwards"}
+                        )
+                        animationIn.addEventListener('finish', () => {
+                            this.getLinks().bindLinksClick()
+                            this.isLoaded = true
+                        })
+                    })
                 }
             })
             .catch(e => {
